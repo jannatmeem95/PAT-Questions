@@ -276,7 +276,7 @@ def main():
         print("This script requires exactly one argument.")
         return
     
-    dataPath = os.path.join('../data',timestamp) + '/PAT-multihop.json'
+    dataPath = os.path.join('../PAT-data',timestamp) + '/PAT-multihop.json'
     if not os.path.exists(dataPath):
         print('Data Path does not exist')
         return
@@ -294,7 +294,7 @@ def main():
     current_month = now.strftime("%B")
     current_year = now.year
 
-    out_path = '../data/' + current_month + str(current_year)
+    out_path = '../PAT-data/' + current_month + str(current_year)
 
     if not os.path.exists(out_path):
         os.makedirs(out_path)
