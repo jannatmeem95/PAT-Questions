@@ -1,6 +1,6 @@
 This is the repo containing PAT-Questions.
 
-The data is stored in `data` folder. Currently two snapshots of data is provided under two different subfolders in the `data` folder.  `Dec2023` contains the gold annotated data on Dec 30, 2023 Wikidata and  `Dec2021` contains the gold annotated data on Dec 30, 2021 Wikidata.
+The data is stored in `PAT-data` folder. Currently two snapshots of data is provided under two different subfolders in the `PAT-data` folder.  `Dec2023` contains the gold annotated data on Dec 30, 2023 Wikidata and  `Dec2021` contains the gold annotated data on Dec 30, 2021 Wikidata.
 
 To get the updated answers/annotations to the PAT-Questions based on the present Wikidata at any point in time, run the following command:
 
@@ -12,7 +12,7 @@ The updated answers will be stored in a new folder named the present `MONTHYEAR`
 
 ## Dataset Description
 
-`data/Dec2023` and `data/Dec2021` folder each contains two files `PAT-singlehop.json` and `PAT-multihop.json` comprising the single and multi-hop questions respectively annotated for that timestamp.
+`PAT-data/Dec2023` and `PAT-data/Dec2021` folder each contains two files `PAT-singlehop.json` and `PAT-multihop.json` comprising the single and multi-hop questions respectively annotated for that timestamp.
 
 `PAT-singlehop.json` and `PAT-multihop.json` contains PAT-questions indexed by the unique `question`.
 Each item in the `json` files contain seven common fields associated:
