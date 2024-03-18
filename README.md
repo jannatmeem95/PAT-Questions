@@ -8,6 +8,8 @@ Run the following commands:
 
 `pip install tqdm`
 
+`pip install unidecode`
+
 ## Instructions to run
 
 The dataset is stored in `PAT-data` folder. Currently two snapshots of data is provided under two different subfolders in the `PAT-data` folder.  `Dec2023` contains the gold annotated data on Dec 30, 2023 Wikidata and  `Dec2021` contains the gold annotated data on Dec 30, 2021 Wikidata.

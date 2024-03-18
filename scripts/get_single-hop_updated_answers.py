@@ -56,9 +56,11 @@ def buildQueryPrevious(sub, pred):
 
 def collect_answers_one_hop(data):
     updated_data = dict()
+    extra_special=dict()
 
     for k,v in tqdm(data.items()):
         answers = []
+        answers_special = []
         sub = v['subject']['subject']
         pred = v['relations'][0]
 
@@ -74,16 +76,26 @@ def collect_answers_one_hop(data):
                     updated_data[k] = nItem
                     continue
             text = []
+            extra_special_text = []
             for res in result_cur:
                 id = res['item']['value'].split('/')[-1]
                 label = res['itemLabel']['value']
                 answers.append({"ID": id, "Label": label})
                 text.append(label)
+                if 2023 - int(res['yearstarttime']['value'] ) >7:
+                    extra_special_text.append(label)
+                    answers_special.append({"ID": id, "Label": label})
+
 
             nItem = v.copy()
             nItem['text answers'] = text
             nItem['answer annotations'] = answers
             updated_data[k] = nItem
+
+            specialItem = v.copy()
+            specialItem['text answers'] = extra_special_text
+            specialItem['answer annotations'] = answers_special
+            extra_special[k] = specialItem
 
         else:
             q = buildQueryPrevious(sub, pred)
@@ -117,7 +129,9 @@ def collect_answers_one_hop(data):
             updated_data[k] = nItem
 
     print(len(updated_data))
-    return updated_data
+    return updated_data, extra_special
+
+
 def main():
     if len(sys.argv) == 2:
         timestamp = sys.argv[1]
@@ -133,8 +147,10 @@ def main():
 
     with open(dataPath,'r') as f:
         data = json.load(f)
-    # updated_data = collect_answers_one_hop(data)
-
+    updated_data, extra_special = collect_answers_one_hop(data)
+    print(f'updated data length: {len(updated_data)}')
+    print(f'extra special data length: {len(extra_special)}')
+    
     from datetime import datetime
 
     # Get the current date and time
@@ -150,6 +166,9 @@ def main():
         os.makedirs(out_path)
     
     with open(os.path.join(out_path, 'PAT-singlehop.json'),'w') as f:
-        json.dump({},f,indent =6)
+        json.dump(updated_data,f,indent =6)
+
+    with open(os.path.join(out_path, 'PAT-singlehop-special-attention.json'),'w') as f:
+        json.dump(extra_special,f,indent =6)
 
 main()

@@ -283,7 +283,7 @@ def main():
 
     with open(dataPath,'r') as f:
         data = json.load(f)
-    # updated_data = collect_two_hop_answers(data)
+    updated_data = collect_two_hop_answers(data)
 
     from datetime import datetime
 
@@ -300,6 +300,6 @@ def main():
         os.makedirs(out_path)
     
     with open(os.path.join(out_path, 'PAT-multihop.json'),'w') as f:
-        json.dump({},f,indent =6)
+        json.dump(updated_data,f,indent =6)
 
 main()
